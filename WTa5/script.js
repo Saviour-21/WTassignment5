@@ -138,7 +138,7 @@ function display(){
                   console.log(data.length);
                   if(data.length == 0)
                   {
-                      document.getElementById("mytable").innerHTML="<h3><div class='container text-center'>No registration till now.</div></h3>";
+                      document.getElementById("op").innerHTML="<h3><div class='container text-center'>No registration till now.</div></h3>";
                   }
                   else{
                     p = "<table class='table table-hover'><thead> <tr><th>First Name</th> <th>Last Name</th> <th>Email id</th> <th>Contact Number</th> <th>State</th> <th>Category</th> </tr>"
