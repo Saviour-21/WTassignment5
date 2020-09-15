@@ -6,7 +6,7 @@ function contact() {
      a.style.display = "none";
      b.style.display = "block";
      c.style.display = "none";
-     cvb();
+     display();
 }
 
 function fill(){
@@ -92,7 +92,7 @@ function valide(){
     }
 
     if(d == ""){
-        alert(" Please fill the Mobile Number field");
+        alert(" Please fill the Phone Number field");
         return false;
     }
     if(isNaN(d)){
@@ -100,16 +100,11 @@ function valide(){
         return false;
     }
     if(d.length!=10){
-        alert("Mobile Number must be 10 digits only");
-        return false;
-    }
-    else if(d==0000000000)
-    {
-        alert("Mobile Number must be 10 digits only");
+        alert("Phone Number must be 10 digits only");
         return false;
     }
     else{
-        alert("form submitted");
+        alert("form submitted successully");
     }
            console.log("one");
            var o={fname: a, lname: b, email: c, phno: d, state_from: e, category: f};
@@ -117,13 +112,11 @@ function valide(){
             var f = JSON.stringify(o);
             console.log(f);
             console.log("yup1");
-
-            abc(f);
-            
+            insert(f);
             document.getElementById("register").reset();
     
 }
-function abc(f){
+function insert(f){
       let url = base_url + "?req=insert&obj=" + f;
       $.get(url,function(data,success){
       if(data == "Data inserted in database"){
@@ -138,24 +131,23 @@ function abc(f){
 }
 
 
-function cvb(){
+function display(){
+    var p;
     let url = base_url + "?req=display";
               $.get(url,function(data,success){
                   console.log(data.length);
                   if(data.length == 0)
                   {
-                      document.getElementById("op").innerHTML="<h3><div class='container text-center'>No registration till now.</div></h3>";
+                      document.getElementById("mytable").innerHTML="<h3><div class='container text-center'>No registration till now.</div></h3>";
                   }
                   else{
-                          var text;
-                          text= "<table class='table table-hover'><thead>";
-                          text=text + "<tr><th>First Name</th><th>Last Name</th><th>Email id</th><th>Contact Number</th><th>State</th><th>Category</th></tr></thead><tbody>";
-                          for(i=0;i<data.length;i++)
-                          {
-                              text= text + "<tr><td>" + data[i].fname+ "</td><td>" + data[i].lname + "</td><td>" + data[i].email + "</td><td>" + data[i].phno + "</td><td>" + data[i].state_from + "</td><td>" + data[i].category + "</td><td>"  + "</td></tr>";
-                          }
-                          text += "</tbody></table>";
-                          document.getElementById("op").innerHTML=text;         
+                    p = "<table class='table table-hover'><thead> <tr><th>First Name</th> <th>Last Name</th> <th>Email id</th> <th>Contact Number</th> <th>State</th> <th>Category</th> </tr>"
+                    for(i=0;i<data.length;i++)
+                    {
+                        p = p + "<tr><td>" + data[i].fname+ "</td><td>" + data[i].lname + "</td><td>" + data[i].email + "</td><td>" + data[i].phno + "</td><td>" + data[i].state_from + "</td><td>" + data[i].category + "</td><td>"  + "</td></tr>";
+                    }
+                    p = p + "</tbody></table>";
+                    document.getElementById("op").innerHTML=p; 
                       }   
               });
   
